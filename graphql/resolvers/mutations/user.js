@@ -10,10 +10,18 @@ export default {
     return { user };
   },
   signup: async (_, { firstName, lastName, email, password }, context) => {
-    const existingUser = await context.User().findOne({ where: { email } });
+    let existingUser = null;
+    try {
+      existingUser = await context.User().findOne({ where: { email } });
+    } catch (error) {
+      existingUser = 'REQUEST_ERROR_EXISTING_USER';
+      console.error('error with existingUser request', error);
+    }
 
-    if (existingUser) {
-      throw new Error('User with email already exists');
+    if (existingUser === 'REQUEST_ERROR_EXISTING_USER') {
+      throw new Error('REQUEST_ERROR_EXISTING_USER');
+    } else if (existingUser) {
+      throw new Error('USER_ALREADY_EXISTS');
     }
     const newUser = {
       firstName,

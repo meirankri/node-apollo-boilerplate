@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon index"
+    "dev": "nodemon index",
+    "migration": "npx sequelize-cli db:migrate"
   },
   "dependencies": {
     "@babel/preset-env": "^7.16.11",

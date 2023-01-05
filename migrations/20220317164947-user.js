@@ -7,22 +7,23 @@ module.exports = {
         type: Sequelize.INTEGER(11).UNSIGNED,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false,
+        allowNull: false
       },
       firstName: Sequelize.DataTypes.STRING,
       lastName: Sequelize.DataTypes.STRING,
       email: {
         type: Sequelize.DataTypes.STRING,
         allowNull: false,
+        unique: true
       },
       password: {
         type: Sequelize.DataTypes.STRING,
-        allowNull: false,
-      },
+        allowNull: false
+      }
     });
   },
 
   async down(queryInterface, Sequelize) {
     return queryInterface.dropTable('User');
-  },
+  }
 };
